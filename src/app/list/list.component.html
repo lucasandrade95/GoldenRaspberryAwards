@@ -1,1 +1,48 @@
-<p>list works!</p>
+<mat-card class="width-auto">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>List movie winners by year</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <table class="text-center">
+      <thead>
+      <tr>
+        <th scope="col">Id</th>
+        <th scope="col" class="display-inline-grid">
+          Year
+          <input type="text" class="config-input" placeholder="Search Year"
+                 [(ngModel)]="searchYear" (keyup.enter)="moviePerYear(searchYear)">
+        </th>
+        <th scope="col">Title</th>
+        <th scope="col" class="display-inline-grid">
+          Winner?
+          <mat-form-field appearance="fill">
+            <mat-label>True/False?</mat-label>
+            <select matNativeControl [(ngModel)]="validateWinner">
+              <option value="true">True</option>
+              <option value="false">False</option>
+            </select>
+          </mat-form-field>
+        </th>
+        <th>
+          <button class="config-button-list pointer"
+                  title="Search List" (click)="moviePerYear(searchYear)">
+            <mat-icon>
+              search
+            </mat-icon>
+          </button>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let movieP of moviePerYears">
+        <td>{{movieP.id}}</td>
+        <td>{{movieP.year}}</td>
+        <td>{{movieP.title}}</td>
+        <td>{{movieP.winner}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </mat-card-content>
+</mat-card>
+
