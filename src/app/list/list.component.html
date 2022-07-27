@@ -19,6 +19,7 @@
           <mat-form-field appearance="fill">
             <mat-label>True/False?</mat-label>
             <select matNativeControl [(ngModel)]="validateWinner">
+              <option value="" selected>All</option>
               <option value="true">True</option>
               <option value="false">False</option>
             </select>

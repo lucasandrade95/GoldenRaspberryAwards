@@ -27,7 +27,10 @@ export class ListComponent implements OnInit {
     size = 206;
     if (year === '') {
       year = undefined;
-
+    }
+    // @ts-ignore
+    if (winner === '') {
+      winner = undefined;
     }
     if (year && winner === undefined) {
       this.dataService.movieInfo(page, size, year)
