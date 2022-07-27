@@ -1,6 +1,5 @@
 import {EventEmitter, Injectable, Output} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
-import {map} from "rxjs";
+import {HttpClient, HttpParams} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -12,12 +11,29 @@ export class ServiceGlobalService {
 
   constructor(private httpClient : HttpClient) { }
 
-  public movieInfo(page: number, size: number, winner: boolean, year: number) {
-    let params = new HttpParams()
-      .append('page', page)
-      .append('size', size)
-      .append('winner', winner)
-      .append('year', year);
+  public movieInfo(page: number, size: number, year?: number | string, winner?: boolean) {
+    let params: any;
+    if (year && winner === undefined) {
+      params = new HttpParams()
+        .append('page', page)
+        .append('size', size)
+        .append('year', year);
+    } else if (winner && year === undefined) {
+      params = new HttpParams()
+        .append('page', page)
+        .append('size', size)
+        .append('winner', winner);
+    } else if (year && winner) {
+      params = new HttpParams()
+        .append('page', page)
+        .append('size', size)
+        .append('year', year)
+        .append('winner', winner);
+    } else {
+      params = new HttpParams()
+        .append('page', page)
+        .append('size', size)
+    }
     return this.httpClient.get<any>(this.baseUrl, {params});
   }
 

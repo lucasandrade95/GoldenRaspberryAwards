@@ -10,6 +10,7 @@ Rodar `ng serve` e navegue para `http://localhost:4200/`.
 
 - Infelizmente, não foi possível concluir a implementação de
   todos os pontos, como por exemplo, a finalização dos testes unitários.
+- Tela Lists - A busca pode ser feita também pelo botão ENTER;
 - Tela Lists - API Dados do filme pela variável "content" não estava sendo carregada com os valores necessários, por isso
 utilizei o serviço dos Filmes por anos para carregar os dados da tabela;
 - Criado arquivo service para receber os serviços da API;

@@ -21,6 +21,7 @@ import {FormsModule} from "@angular/forms";
 import {MatExpansionModule} from "@angular/material/expansion";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
+import {NgxPaginationModule} from "ngx-pagination";
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,7 +46,8 @@ import {MatInputModule} from "@angular/material/input";
     FormsModule,
     MatExpansionModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    NgxPaginationModule
   ],
   providers: [],
   bootstrap: [AppComponent]

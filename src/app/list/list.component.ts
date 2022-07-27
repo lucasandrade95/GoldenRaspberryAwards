@@ -9,18 +9,51 @@ import {ServiceGlobalService} from "../service/service-global.service";
 export class ListComponent implements OnInit {
   moviePerYears: any;
   searchYear!: number;
-  validateWinner = true;
+  validateWinner: undefined;
+  allMoviesYears: any
+  totalList = 206;
+  page = 0;
 
-  constructor(private dataService: ServiceGlobalService,) { }
+  constructor(
+    private dataService: ServiceGlobalService
+  ) { }
 
   ngOnInit(): void {
-    this.moviePerYear(2019);
+    this.moviesInfo(0, 206)
   }
 
-  moviePerYear(year: number) {
-    this.dataService.moviePerYear(this.validateWinner, year ? year: 2019)
-      .subscribe((result) => {
-        this.moviePerYears = result;
-      });
+  moviesInfo(page: number, size: number, year?: number | string, winner?:boolean) {
+    page = 0;
+    size = 206;
+    if (year === '') {
+      year = undefined;
+
+    }
+    if (year && winner === undefined) {
+      this.dataService.movieInfo(page, size, year)
+        .subscribe((result) => {
+          this.totalList = result.content.length;
+          this.allMoviesYears = result.content;
+        });
+    } else if (winner !== undefined && year === undefined) {
+      this.dataService.movieInfo(page, size, undefined, winner)
+        .subscribe((result) => {
+          this.totalList = result.content.length;
+          this.allMoviesYears = result.content;
+        });
+    } else if (winner && year) {
+      this.dataService.movieInfo(page, size, year, winner)
+        .subscribe((result) => {
+          this.totalList = result.content.length;
+          this.allMoviesYears = result.content;
+        });
+    } else {
+      this.dataService.movieInfo(page, size)
+        .subscribe((result) => {
+          this.totalList = result.content.length;
+          this.allMoviesYears = result.content;
+        });
+    }
+
   }
 }

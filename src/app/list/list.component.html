@@ -1,7 +1,7 @@
 <mat-card class="width-auto">
   <mat-card-header>
     <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title>List movie winners by year</mat-card-title>
+    <mat-card-title>List movies</mat-card-title>
   </mat-card-header>
   <mat-card-content>
     <table class="text-center">
@@ -11,7 +11,7 @@
         <th scope="col" class="display-inline-grid">
           Year
           <input type="text" class="config-input" placeholder="Search Year"
-                 [(ngModel)]="searchYear" (keyup.enter)="moviePerYear(searchYear)">
+                 [(ngModel)]="searchYear" (keyup.enter)="moviesInfo(page, totalList, searchYear, validateWinner)">
         </th>
         <th scope="col">Title</th>
         <th scope="col" class="display-inline-grid">
@@ -26,7 +26,7 @@
         </th>
         <th>
           <button class="config-button-list pointer"
-                  title="Search List" (click)="moviePerYear(searchYear)">
+                  title="Search List" (click)="moviesInfo(page, totalList, searchYear, validateWinner)">
             <mat-icon>
               search
             </mat-icon>
@@ -35,14 +35,24 @@
       </tr>
       </thead>
       <tbody>
-      <tr *ngFor="let movieP of moviePerYears">
-        <td>{{movieP.id}}</td>
-        <td>{{movieP.year}}</td>
-        <td>{{movieP.title}}</td>
-        <td>{{movieP.winner}}</td>
+      <tr *ngFor="let allMovie of allMoviesYears | paginate: {
+        itemsPerPage: 10,
+        currentPage: page,
+        totalItems: totalList
+      }">
+        <td>{{allMovie.id}}</td>
+        <td>{{allMovie.year}}</td>
+        <td>{{allMovie.title}}</td>
+        <td>{{allMovie.winner}}</td>
       </tr>
       </tbody>
     </table>
+
   </mat-card-content>
+  <div class="list-alignt-end">
+    <pagination-controls (pageChange)="page = $event"></pagination-controls>
+  </div>
+
 </mat-card>
+
 
